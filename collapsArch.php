@@ -84,15 +84,16 @@ class collapsArch {
     return($css);
   }
   function phpArrayToJS($array, $name, $options) {
+
     /* generates javscript code to create an array from a php array */
     print "try { $name" . 
         "['catTest'] = 'test'; } catch (err) { $name = new Object(); }\n";
     if (!$options['expandYears'] && $options['expandMonths']) {
       $lastYear = -1;
       foreach ($array as $key => $value){
-        $parts = explode('-', $key);
+        $parts = explode('-', $key); 
         $label = $parts[0];
-        $year = $parts[1];
+        $year = (int)$parts[1];
         $moreparts = explode(':', $key);
         $widget = $moreparts[1];
         if ($year != $lastYear) {

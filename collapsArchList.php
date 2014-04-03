@@ -189,6 +189,7 @@ function list_archives($options) {
         } else {
           $lastID = "collapsArch-$currentYear-$currentMonth:$number";
         }
+
         if( $expandYears ) {
           if( $expandMonths ) {
             $expandingCurrentMonth = $expandCurrentMonth && $currentYear == date('Y')
@@ -199,14 +200,14 @@ function list_archives($options) {
               $archives .= "\n        </ul>\n";
             $archives .= "        </div>\n      </li> <!-- close expanded month --> \n";
           } else {
-            $archives .= "      </li> <!-- close month --> \n";
+            $archives .= "    </li> <!-- close month1 --> \n";
           }
           $archives .= "  </ul>\n     </div>\n  </li> <!-- end year -->\n";
         } else {
           if( $expandMonths ) {
             $archives .= "   </ul>\n     </div>\n  </li> <!-- end year -->\n";
           } else {
-            $archives .= "  </li> <!-- end year -->\n";
+            $archives .= "    </li> <!-- end year -->\n";
           }
         }
       }
@@ -271,7 +272,7 @@ function list_archives($options) {
             $archives .= "\n        </ul>\n";
           $archives .= "       </div>\n      </li> <!-- close expanded month --> \n";
         } else {
-          $archives .= "      </li> <!-- close month --> \n";
+          $archives .= "         </li> <!-- close month4 --> \n";
         }
       }
     }
@@ -353,7 +354,8 @@ function list_archives($options) {
     if ($showPostTitle  && $expandMonths) {
 
       //$title_text = htmlspecialchars(strip_tags(__($archPost->post_title)), ENT_QUOTES);
-      $title_text = apply_filters('post_title', $archPost->post_title);
+      //$title_text = apply_filters('post_title', $archPost->post_title);
+      $title_text = apply_filters('single_post_title', $archPost->post_title);
       if(strlen(trim($title_text))==0) {
         $title_text = $noTitle;
       }
@@ -396,8 +398,8 @@ function list_archives($options) {
         OR ($useCookies AND !$_COOKIE[$theID]==1)) {
       $archives .= '';
     }
-    $archives .= "        </div>
-    </li> <!-- close month -->\n";
+    $archives .= "    <!-- echelon fix </div> -->   
+    </li> <!-- close month2 -->\n";
     $archives .= "  </ul></div>";
     if ($monthText!='')
       $monthText = "<ul>$monthText</ul>";
@@ -408,12 +410,13 @@ function list_archives($options) {
   }
  
   if ($expandYears && !$expandMonths) {
-    $archives .= "  </li> <!-- close month --></div><!-- close year -->\n";
+    $archives .= "  </li> <!-- close month3 --></div><!-- close year -->\n";
     $collapsArchItems[$theID] = $theID;
   }
   if ($expandYears) {
     $archives .= "</li> <!-- end of collapsing archives -->";
   }
+
   return($archives);
 }
 ?>
